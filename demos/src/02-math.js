@@ -6,7 +6,7 @@ function multiply(a, b) {
 }
 function divide(a, b) {
   if (b === 0) {
-    return null
+    return null;
   }
   return a / b;
 }
