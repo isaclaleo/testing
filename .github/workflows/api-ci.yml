@@ -1,4 +1,5 @@
 name: API CI
+
 #on: [push]
 on:
   push:
@@ -12,7 +13,7 @@ defaults:
     working-directory: ./api
 
 jobs:
-  unit-linter:
+  linter:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,7 +30,6 @@ jobs:
       - name: run linter
         shell: bash
         run: npm run lint
-
   unit-test:
     runs-on: ubuntu-latest
     steps:
@@ -47,10 +47,11 @@ jobs:
       - name: run unit test
         shell: bash
         run: npm run test
-  2e2:
+  e2e:
     runs-on: ubuntu-latest
     container:
       image: node:14
+
     services:
       mongo-e2e:
         image: mongo:4.4
@@ -59,6 +60,7 @@ jobs:
         env:
           MONGO_INITDB_ROOT_USERNAME: test
           MONGO_INITDB_ROOT_PASSWORD: test123
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
